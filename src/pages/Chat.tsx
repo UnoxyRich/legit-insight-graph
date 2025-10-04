@@ -3,6 +3,7 @@ import { ChatInput } from "@/components/chat/ChatInput";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { PolicyCard } from "@/components/policy/PolicyCard";
 import { ModeSelector } from "@/components/chat/ModeSelector";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Search } from "lucide-react";
 
 type Message = {
@@ -92,6 +93,7 @@ const Chat = () => {
               status: "Active",
               lastAction: "Amendment vote - Passed",
               confidence: 94,
+              year: 2010,
               matchedSections: [
                 "Section 1201(4) - Marketplace establishment",
                 "Section 1302 - Essential health benefits",
@@ -101,15 +103,16 @@ const Chat = () => {
             },
             {
               id: (Date.now() + 1).toString(),
-              title: "CHIP Reauthorization Act",
+              title: "Social Security Act",
               jurisdiction: "Federal",
               status: "Active",
-              lastAction: "Conference report agreed",
+              lastAction: "Amended multiple times",
               confidence: 87,
+              year: 1935,
               matchedSections: [
-                "Section 50101 - CHIP funding extension",
-                "Section 50201 - Mental health parity",
-                "Section 50301 - Medicaid improvements",
+                "Title II - Federal Old-Age Benefits",
+                "Title XVIII - Health Insurance for Aged",
+                "Title XIX - Grants to States",
               ],
               messageId: assistantMessageId,
             },
@@ -122,16 +125,19 @@ const Chat = () => {
   return (
     <div className="flex flex-col h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-border bg-card backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Search className="h-6 w-6 text-primary" />
-              <h1 className="text-xl font-semibold text-foreground">
+            <div className="flex items-center gap-3">
+              <Search className="h-6 w-6 text-foreground" />
+              <h1 className="text-xl font-semibold text-foreground tracking-tight">
                 Legislative Transparency
               </h1>
             </div>
-            <ModeSelector mode={mode} onModeChange={setMode} />
+            <div className="flex items-center gap-3">
+              <ModeSelector mode={mode} onModeChange={setMode} />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
@@ -141,13 +147,13 @@ const Chat = () => {
         <div className="container mx-auto px-4 py-6 max-w-4xl">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-              <div className="bg-gradient-primary rounded-full p-6 mb-6 shadow-medium">
-                <Search className="h-12 w-12 text-white" />
+              <div className="bg-primary rounded-sm p-6 mb-6">
+                <Search className="h-12 w-12 text-primary-foreground" />
               </div>
-              <h2 className="text-3xl font-bold text-foreground mb-3">
+              <h2 className="text-3xl font-serif font-bold text-foreground mb-3 tracking-tight">
                 Ask about legislation
               </h2>
-              <p className="text-muted-foreground text-lg max-w-md">
+              <p className="text-muted-foreground text-base max-w-md leading-relaxed">
                 Search policies, track changes, and understand who influences
                 the laws that affect you
               </p>
@@ -175,7 +181,7 @@ const Chat = () => {
       </main>
 
       {/* Input */}
-      <div className="border-t border-border bg-card/50 backdrop-blur-sm">
+      <div className="border-t border-border bg-card backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 max-w-4xl">
           <ChatInput
             onSend={handleSendMessage}

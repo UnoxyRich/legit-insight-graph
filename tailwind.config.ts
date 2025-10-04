@@ -13,6 +13,12 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'serif': ['Crimson Text', 'Georgia', 'serif'],
+        'classic': ['Libre Baskerville', 'Georgia', 'serif'],
+        'modern': ['Inter', 'system-ui', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

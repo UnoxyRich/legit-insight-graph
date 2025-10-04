@@ -12,6 +12,7 @@ type Policy = {
   lastAction: string;
   confidence: number;
   matchedSections: string[];
+  year?: number; // Year of policy enactment
 };
 
 type PolicyCardProps = {
@@ -27,14 +28,18 @@ export const PolicyCard = ({ policy }: PolicyCardProps) => {
     return "text-muted-foreground";
   };
 
+  // Determine if policy is old (pre-2000) or modern (2000+)
+  const isOldPolicy = policy.year && policy.year < 2000;
+  const fontClass = isOldPolicy ? "font-classic" : "font-modern";
+
   return (
-    <Card className="shadow-medium hover:shadow-strong transition-all duration-300 border-border hover:border-primary/50">
+    <Card className="shadow-soft hover:shadow-medium transition-all border-border">
       <CardContent className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <FileText className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold text-foreground">
+              <FileText className="h-5 w-5 text-foreground" />
+              <h3 className={`text-lg font-semibold text-foreground ${fontClass}`}>
                 {policy.title}
               </h3>
             </div>
@@ -87,7 +92,8 @@ export const PolicyCard = ({ policy }: PolicyCardProps) => {
 
         <Button
           onClick={() => navigate(`/transparency/${policy.id}`)}
-          className="w-full shadow-soft"
+          className="w-full"
+          variant="outline"
         >
           View DNA
         </Button>
