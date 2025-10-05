@@ -19,14 +19,14 @@ const TransparencyGraph = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-border bg-card/95 backdrop-blur-md sticky top-0 z-10 shadow-soft">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => navigate("/")}
-              className="rounded-full"
+              className="rounded-full hover:bg-secondary"
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
@@ -34,7 +34,8 @@ const TransparencyGraph = () => {
               <h1 className="text-xl font-semibold text-foreground">
                 {policyTitle}
               </h1>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground flex items-center gap-2">
+                <span className="inline-block w-2 h-2 rounded-full bg-accent" />
                 Transparency Graph
               </p>
             </div>
@@ -48,9 +49,11 @@ const TransparencyGraph = () => {
           {/* Left Column - Timeline & Blame */}
           <div className="lg:col-span-2 space-y-6">
             {/* Version Timeline */}
-            <div className="bg-card rounded-xl border border-border p-6 shadow-medium">
-              <div className="flex items-center gap-2 mb-4">
-                <GitBranch className="h-5 w-5 text-primary" />
+            <div className="bg-card rounded-xl border-2 border-border p-6 shadow-large hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <GitBranch className="h-5 w-5 text-primary" />
+                </div>
                 <h2 className="text-lg font-semibold text-foreground">
                   Version Timeline
                 </h2>
@@ -62,9 +65,11 @@ const TransparencyGraph = () => {
             </div>
 
             {/* Blame View */}
-            <div className="bg-card rounded-xl border border-border p-6 shadow-medium">
-              <div className="flex items-center gap-2 mb-4">
-                <FileText className="h-5 w-5 text-primary" />
+            <div className="bg-card rounded-xl border-2 border-border p-6 shadow-large hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <FileText className="h-5 w-5 text-primary" />
+                </div>
                 <h2 className="text-lg font-semibold text-foreground">
                   Clause Attribution
                 </h2>
@@ -76,7 +81,7 @@ const TransparencyGraph = () => {
           {/* Right Column - Influence & History */}
           <div className="space-y-6">
             {/* Influence Overlay */}
-            <div className="bg-card rounded-xl border border-border p-6 shadow-medium">
+            <div className="bg-card rounded-xl border-2 border-border p-6 shadow-large hover:shadow-xl transition-shadow">
               <Tabs defaultValue="lobbying" className="w-full">
                 <TabsList className="w-full grid grid-cols-2 mb-4">
                   <TabsTrigger value="lobbying" className="gap-2">
@@ -98,10 +103,15 @@ const TransparencyGraph = () => {
             </div>
 
             {/* History Panel */}
-            <div className="bg-card rounded-xl border border-border p-6 shadow-medium">
-              <h2 className="text-lg font-semibold text-foreground mb-4">
-                Commitments & History
-              </h2>
+            <div className="bg-card rounded-xl border-2 border-border p-6 shadow-large hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <FileText className="h-5 w-5 text-primary" />
+                </div>
+                <h2 className="text-lg font-semibold text-foreground">
+                  Commitments & History
+                </h2>
+              </div>
               <HistoryPanel />
             </div>
           </div>

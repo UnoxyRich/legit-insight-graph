@@ -40,13 +40,13 @@ export const ChatInput = ({ onSend, disabled, mode }: ChatInputProps) => {
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         disabled={disabled}
-        className="min-h-[60px] pr-12 resize-none shadow-soft"
+        className="min-h-[80px] pr-14 resize-none shadow-medium border-2 focus-visible:border-primary transition-colors"
       />
       <Button
         type="submit"
         size="icon"
         disabled={!input.trim() || disabled}
-        className="absolute right-2 bottom-2 rounded-full shadow-medium"
+        className="absolute right-3 bottom-3 rounded-full shadow-medium hover:shadow-large transition-all"
       >
         <Send className="h-4 w-4" />
       </Button>

@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FileText, TrendingUp, Clock, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 type Policy = {
   id: string;
@@ -21,25 +21,24 @@ type PolicyCardProps = {
 
 export const PolicyCard = ({ policy }: PolicyCardProps) => {
   const navigate = useNavigate();
+  const fontClass = policy.year && policy.year < 2000 ? "font-classic" : "font-modern";
 
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 90) return "text-success";
-    if (confidence >= 75) return "text-warning";
+    if (confidence >= 90) return "text-emerald-600 dark:text-emerald-400";
+    if (confidence >= 75) return "text-amber-600 dark:text-amber-400";
     return "text-muted-foreground";
   };
 
-  // Determine if policy is old (pre-2000) or modern (2000+)
-  const isOldPolicy = policy.year && policy.year < 2000;
-  const fontClass = isOldPolicy ? "font-classic" : "font-modern";
-
   return (
-    <Card className="shadow-soft hover:shadow-medium transition-all border-border">
+    <Card className="shadow-medium hover:shadow-large transition-all border-2 hover:border-primary/50">
       <CardContent className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <FileText className="h-5 w-5 text-foreground" />
-              <h3 className={`text-lg font-semibold text-foreground ${fontClass}`}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <FileText className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className={`text-xl font-semibold text-foreground ${fontClass}`}>
                 {policy.title}
               </h3>
             </div>
@@ -60,12 +59,12 @@ export const PolicyCard = ({ policy }: PolicyCardProps) => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 bg-muted px-3 py-1 rounded-full">
+          <div className="flex items-center gap-2 bg-muted/50 px-4 py-2 rounded-full border border-border">
             <TrendingUp
               className={`h-4 w-4 ${getConfidenceColor(policy.confidence)}`}
             />
             <span
-              className={`text-sm font-semibold ${getConfidenceColor(
+              className={`text-sm font-bold ${getConfidenceColor(
                 policy.confidence
               )}`}
             >
@@ -92,10 +91,10 @@ export const PolicyCard = ({ policy }: PolicyCardProps) => {
 
         <Button
           onClick={() => navigate(`/transparency/${policy.id}`)}
-          className="w-full"
-          variant="outline"
+          className="w-full shadow-medium hover:shadow-large transition-all"
+          size="lg"
         >
-          View DNA
+          View Transparency Graph
         </Button>
       </CardContent>
     </Card>
