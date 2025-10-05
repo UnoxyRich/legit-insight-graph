@@ -32,12 +32,12 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
               : "bg-card text-card-foreground border border-border"
           }`}
         >
-          <p className="text-sm leading-relaxed whitespace-pre-wrap">
-            {message.content}
+          <div className="text-base leading-relaxed whitespace-pre-wrap">
+            {message.content.replace(/\*/g, '')}
             {message.isStreaming && (
               <span className="inline-block w-1 h-4 ml-1 bg-current animate-pulse" />
             )}
-          </p>
+          </div>
         </div>
 
         {!isUser && !message.isStreaming && message.content && (
